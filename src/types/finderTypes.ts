@@ -1,9 +1,9 @@
-type LocationType = "work" | "about" | "resume" | "trash";
+export type LocationType = "work" | "about" | "resume" | "trash";
 
-type FileKind = "file" | "folder";
-type FileType = "txt" | "url" | "img" | "fig" | "pdf";
+export type FileKind = "file" | "folder";
+export type FileType = "txt" | "url" | "img" | "fig" | "pdf";
 
-interface BaseItem {
+export interface BaseItem {
   id: number;
   name: string;
   icon: string;
@@ -11,7 +11,7 @@ interface BaseItem {
   position?: string;
 }
 
-interface FileItem extends BaseItem {
+export interface FileItem extends BaseItem {
   kind: "file";
   fileType: FileType;
   href?: string;
@@ -21,34 +21,22 @@ interface FileItem extends BaseItem {
   description?: readonly string[];
 }
 
-interface FolderItem extends BaseItem {
+export interface FolderItem extends BaseItem {
   kind: "folder";
   type?: LocationType;
   windowPosition?: string;
   children?: readonly Item[];
 }
 
-type Item = FileItem | FolderItem;
+export type Item = FileItem | FolderItem;
 
-interface LocationFolder extends FolderItem {
+export interface LocationFolder extends FolderItem {
   type: LocationType;
   children: readonly Item[];
 }
 
-interface LocationStoreState {
+export interface LocationStoreState {
   activeLocation: LocationFolder | null;
   setActiveLocation: (location: LocationFolder | null) => void;
   resetActiveLocation: () => void;
 }
-
-export type {
-  FileKind,
-  FileType,
-  BaseItem,
-  FileItem,
-  FolderItem,
-  Item,
-  LocationFolder,
-  LocationStoreState,
-  LocationType,
-};

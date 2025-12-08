@@ -1,4 +1,5 @@
-import type { LocationFolder, LocationType } from "@types";
+import type { Windows } from "@store/window";
+import type { LocationFolder, LocationType } from "../types/finderTypes";
 
 const navLinks = [
   {
@@ -494,7 +495,7 @@ export const locations = {
 
 const INITIAL_Z_INDEX = 1000;
 
-const WINDOW_CONFIG = {
+const WINDOW_CONFIG: Windows = {
   finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },

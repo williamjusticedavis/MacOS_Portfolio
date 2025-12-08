@@ -1,7 +1,7 @@
 import { locations } from "@constants";
+import type { LocationFolder, LocationStoreState } from "../types/finderTypes";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { LocationFolder, LocationStoreState } from "@/types";
 
 const DEFAULT_LOCATION: LocationFolder = locations.work;
 

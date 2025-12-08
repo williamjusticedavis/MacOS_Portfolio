@@ -1,4 +1,5 @@
 import type { WINDOW_CONFIG, dockApps } from "@constants";
+import type { FileItem } from "./finderTypes";
 
 export type WindowName = keyof typeof WINDOW_CONFIG;
 
@@ -21,3 +22,14 @@ export type DockApp =
       icon: string;
       canOpen: false;
     };
+
+export type WindowDataMap = {
+  finder: null;
+  contact: null;
+  resume: FileItem | null;
+  safari: FileItem | null;
+  photos: null;
+  terminal: null;
+  txtfile: FileItem | null;
+  imgfile: FileItem | null;
+};
