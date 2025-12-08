@@ -1,7 +1,6 @@
-import type { DockApp, WindowName } from "@constants";
-import useWindowStore from "@store/window";
+import useWindowStore, { type WindowKey } from "@store/window";
 
-const WindowControls = ({ target }: { target: WindowName & DockApp["id"] }) => {
+const WindowControls = ({ target }: { target: WindowKey }) => {
   const { closeWindow } = useWindowStore();
   return (
     <div id="window-controls">

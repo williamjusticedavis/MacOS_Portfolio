@@ -14,7 +14,13 @@ const navLinks = [
     name: "Resume",
     type: "resume",
   },
-];
+] as const;
+
+export type NavLinksTypes = {
+  id: number;
+  name: string;
+  type: "finder" | "contact" | "resume";
+};
 
 const navIcons = [
   {

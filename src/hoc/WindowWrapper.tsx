@@ -1,15 +1,14 @@
 import { useLayoutEffect, useRef, type ComponentType, type FC } from "react";
 import { useGSAP } from "@gsap/react";
-import useWindowStore from "@store/window";
+import useWindowStore, { type WindowKey } from "@store/window";
 import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
-import type { DockApp, WindowName } from "@constants";
 
 type WindowWrapperProps<T> = T;
 
 const WindowWrapper = <T extends object>(
   Component: ComponentType<T>,
-  windowKey: WindowName & DockApp["id"]
+  windowKey: WindowKey
 ) => {
   const Wrapped: FC<WindowWrapperProps<T>> = (props) => {
     const { focusWindow, windows } = useWindowStore();
