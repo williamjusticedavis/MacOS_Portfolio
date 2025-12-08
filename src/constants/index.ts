@@ -72,7 +72,21 @@ const dockApps = [
     icon: "trash.png",
     canOpen: false,
   },
-];
+] as const;
+
+export type DockApp =
+  | {
+      id: Exclude<(typeof dockApps)[number]["id"], "trash">;
+      name: string;
+      icon: string;
+      canOpen: true;
+    }
+  | {
+      id: "trash";
+      name: string;
+      icon: string;
+      canOpen: false;
+    };
 
 const blogPosts = [
   {
@@ -502,5 +516,7 @@ const WINDOW_CONFIG = {
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
+
+export type WindowName = keyof typeof WINDOW_CONFIG;
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
