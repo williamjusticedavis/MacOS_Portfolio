@@ -12,6 +12,7 @@ export default defineConfig({
         dirname(fileURLToPath(import.meta.url)),
         "src/components"
       ),
+      "@types": resolve(dirname(fileURLToPath(import.meta.url)), "src/types"),
       "@constants": resolve(
         dirname(fileURLToPath(import.meta.url)),
         "src/constants"

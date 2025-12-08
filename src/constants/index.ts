@@ -1,3 +1,5 @@
+import type { LocationFolder, LocationType } from "@types";
+
 const navLinks = [
   {
     id: 1,
@@ -15,12 +17,6 @@ const navLinks = [
     type: "resume",
   },
 ] as const;
-
-export type NavLinksTypes = {
-  id: number;
-  name: string;
-  type: "finder" | "contact" | "resume";
-};
 
 const navIcons = [
   {
@@ -44,55 +40,41 @@ const navIcons = [
 const dockApps = [
   {
     id: "finder",
-    name: "Portfolio", // was "Finder"
+    name: "Portfolio",
     icon: "finder.png",
     canOpen: true,
   },
   {
     id: "safari",
-    name: "Articles", // was "Safari"
+    name: "Articles",
     icon: "safari.png",
     canOpen: true,
   },
   {
     id: "photos",
-    name: "Gallery", // was "Photos"
+    name: "Gallery",
     icon: "photos.png",
     canOpen: true,
   },
   {
     id: "contact",
-    name: "Contact", // or "Get in touch"
+    name: "Contact",
     icon: "contact.png",
     canOpen: true,
   },
   {
     id: "terminal",
-    name: "Skills", // was "Terminal"
+    name: "Skills",
     icon: "terminal.png",
     canOpen: true,
   },
   {
     id: "trash",
-    name: "Archive", // was "Trash"
+    name: "Archive",
     icon: "trash.png",
     canOpen: false,
   },
 ] as const;
-
-export type DockApp =
-  | {
-      id: Exclude<(typeof dockApps)[number]["id"], "trash">;
-      name: string;
-      icon: string;
-      canOpen: true;
-    }
-  | {
-      id: "trash";
-      name: string;
-      icon: string;
-      canOpen: false;
-    };
 
 const blogPosts = [
   {
@@ -401,7 +383,7 @@ const WORK_LOCATION = {
       ],
     },
   ],
-};
+} as const;
 
 const ABOUT_LOCATION = {
   id: 2,
@@ -454,7 +436,7 @@ const ABOUT_LOCATION = {
       ],
     },
   ],
-};
+} as const;
 
 const RESUME_LOCATION = {
   id: 3,
@@ -473,7 +455,7 @@ const RESUME_LOCATION = {
       // href: "/your/resume/path.pdf",
     },
   ],
-};
+} as const;
 
 const TRASH_LOCATION = {
   id: 4,
@@ -501,14 +483,14 @@ const TRASH_LOCATION = {
       imageUrl: "/images/trash-2.png",
     },
   ],
-};
+} as const;
 
 export const locations = {
   work: WORK_LOCATION,
   about: ABOUT_LOCATION,
   resume: RESUME_LOCATION,
   trash: TRASH_LOCATION,
-};
+} satisfies Record<LocationType, LocationFolder>;
 
 const INITIAL_Z_INDEX = 1000;
 
@@ -522,7 +504,5 @@ const WINDOW_CONFIG = {
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
-
-export type WindowName = keyof typeof WINDOW_CONFIG;
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
