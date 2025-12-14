@@ -1,5 +1,5 @@
 import type { WINDOW_CONFIG, dockApps } from "@constants";
-import type { FileItem } from "./finderTypes";
+import type { FileItem, FolderItem } from "./finderTypes";
 
 export type WindowName = keyof typeof WINDOW_CONFIG;
 
@@ -24,7 +24,7 @@ export type DockApp =
     };
 
 export type WindowDataMap = {
-  finder: null;
+  finder: FolderItem | null;
   contact: null;
   resume: FileItem | null;
   safari: FileItem | null;
