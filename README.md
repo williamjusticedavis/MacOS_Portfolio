@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# macOS Portfolio 💻🍎
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, interactive **macOS-inspired portfolio website** built to showcase my projects, skills, and experience in a fun and familiar desktop-like environment.  
+This project is inspired by one of **JavaScript Mastery (JSMastery)**’s latest tutorials and focuses on modern UI/UX, smooth animations, and clean architecture.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🖥️ **macOS-like Desktop UI**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  - Dock with interactive app icons
+  - Draggable windows
+  - Smooth open/close animations
 
-## Expanding the ESLint configuration
+- 🎨 **Modern & Minimal Design**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - Pixel-perfect UI
+  - macOS-inspired typography and colors
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- ⚡ **Fast & Responsive**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  - Fully responsive across devices
+  - Optimized for performance
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- 🧩 **Reusable Components**
+
+  - Clean, modular codebase
+  - Scalable structure for future features
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** React js
+- **Styling:** Tailwind CSS
+- **Animations:** GSAP
+- **Icons & UI:** Custom SVGs, Lucide, macOS-inspired assets
+- **State Management:** Zustand
+
+---
+
+## 📂 Project Structure
+
+```
+├── components/        # UI components (Dock, Navbar and mroe)
+├── public/            # Static assets
+├── index.css/         # Global styles
+├── store/             # Zustand store for global states
+└── types/             # Typescript types definitions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/williamjusticedavis/MacOS_Portfolio.git
+cd MacOS_Portfolio
 ```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5174](http://localhost:5174) in your browser to see the app.
+
+---
+
+## 📚 Inspiration & Credits
+
+- **JavaScript Mastery (JSMastery)** – Tutorial inspiration
+- **Apple macOS** – UI/UX inspiration
+
+---
+
+## 📌 Future Improvements
+
+- [ ] Add more desktop apps (Archive, Gallery)
+- [ ] Improve accessibility (keyboard navigation, Dark mode and more)
+- [ ] Add multilingual support
+
+---
+
+## 📄 License
+
+This project is for **personal and educational use**.  
+Feel free to fork and customize it for your own portfolio.
+
+---
+
+## 🙌 Acknowledgements
+
+Big thanks to **JavaScript Mastery** for consistently delivering high-quality tutorials that push modern web development forward.
+
+---
+
+⭐ If you like this project, consider giving it a star!

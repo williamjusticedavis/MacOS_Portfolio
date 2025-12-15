@@ -20,7 +20,7 @@ export type WindowStore = {
   nextZIndex: number;
   openWindow: <K extends WindowKey>(
     windowKey: K,
-    data: WindowDataMap[K]
+    data?: WindowDataMap[K]
   ) => void;
   closeWindow: <K extends WindowKey>(windowKey: K) => void;
   focusWindow: <K extends WindowKey>(windowKey: K) => void;
