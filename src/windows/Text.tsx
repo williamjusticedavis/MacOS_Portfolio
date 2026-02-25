@@ -18,15 +18,18 @@ const Text = () => {
       </div>
 
       <div className="p-5 space-y-6 bg-white">
-        <div className="space-y-2">
-          <p className="text-sm text-gray-600">{description}</p>
+        <div className="flex gap-2 items-center">
+          {subtitle && <h3 className="text-lg font-semibold">{subtitle}</h3>}
+          {image && (
+            <div>
+              <img
+                src={"/images/Rolling_Eyes_Emoji_Icon.jpg"}
+                alt={name}
+                className="w-8 h-8 rounded"
+              />
+            </div>
+          )}
         </div>
-        {image && (
-          <div>
-            <img src={image} alt={name} className="w-auto h-auto rounded" />
-          </div>
-        )}
-        {subtitle && <h3 className="text-lg font-semibold">{subtitle}</h3>}
         {Array.isArray(description) && description.length > 0 && (
           <div className="space-y-3 leading-relaxed text-base text-gray-800">
             {description.map((para, index) => (

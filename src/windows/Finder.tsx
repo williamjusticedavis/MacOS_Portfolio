@@ -33,11 +33,7 @@ const Finder = () => {
   };
 
   const openItem = (item: Item) => {
-    console.log(item);
-
     if (item.kind === "folder") {
-      console.log(isLocationFolder(item));
-
       if (isLocationFolder(item)) {
         return setActiveLocation(item);
       }
@@ -62,10 +58,10 @@ const Finder = () => {
   };
 
   const renderList = <
-    T extends { id: number; icon: string; name: string; kind: string }
+    T extends { id: number; icon: string; name: string; kind: string },
   >(
     name: string,
-    items: readonly T[]
+    items: readonly T[],
   ) => (
     <div>
       <h3>{name}</h3>
@@ -79,7 +75,7 @@ const Finder = () => {
               }
             }}
             className={clsx(
-              item.id === activeLocation?.id ? "active" : "not-active"
+              item.id === activeLocation?.id ? "active" : "not-active",
             )}
           >
             <img src={item.icon} alt={item.name} className="w-4" />
