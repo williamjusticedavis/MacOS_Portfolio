@@ -77,50 +77,66 @@ const dockApps = [
   },
 ] as const;
 
+// Dates are each tool's public release.
 const blogPosts = [
   {
     id: 1,
-    date: "October 1, 2012",
-    title: "TypeScript, A strongly typed superset of JavaScript",
-    image: "/images/Typescript_logo.png",
-    link: "https://www.typescriptlang.org/",
+    date: "February 24, 2025",
+    title: "Claude Code, An agentic coding tool that works right in your terminal",
+    image: "/images/tools/claude-code.png",
+    link: "https://claude.com/product/claude-code",
   },
   {
     id: 2,
-    date: "May 29, 2013",
-    title: "React, A library for building user interfaces",
-    image: "/images/React.png",
-    link: "https://react.dev/",
+    date: "March 14, 2023",
+    title: "Claude, Anthropic's AI model for thinking, writing and coding",
+    image: "/images/tools/claude.png",
+    link: "https://claude.ai",
   },
   {
     id: 3,
-    date: "November 1, 2017",
-    title: "Tailwind, Utility-first CSS for rapid UI development",
-    image: "/images/Tailwind CSS.png",
-    link: "https://tailwindcss.com/",
+    date: "July 19, 2022",
+    title: "TanStack, Type-safe routing, data fetching and full-stack React",
+    image: "/images/tools/tanstack.png",
+    link: "https://tanstack.com",
+  },
+  {
+    id: 4,
+    date: "September 9, 2021",
+    title: "Drizzle ORM, A lightweight, type-safe ORM for TypeScript and SQL",
+    image: "/images/tools/drizzle.png",
+    link: "https://orm.drizzle.team",
   },
 ];
 
 const techStack = [
   {
     category: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript"],
+    items: ["React", "TypeScript", "TanStack", "Next.js", "Astro"],
   },
   {
     category: "Styling",
-    items: ["Tailwind CSS", "CSS", "MUI"],
+    items: ["Tailwind CSS", "shadcn/ui", "GSAP"],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "NestJS"],
+    items: ["Node.js", "Bun", "Express", "Hono", "Zod"],
   },
   {
     category: "Database",
-    items: ["SQLserver", "PostgreSQL", "MongoDB"],
+    items: ["PostgreSQL", "Drizzle", "SQL Server"],
+  },
+  {
+    category: "AI",
+    items: ["Claude Code", "Claude API", "Agent Skills"],
+  },
+  {
+    category: "DevOps",
+    items: ["Docker", "Cloudflare", "Railway", "Vercel"],
   },
   {
     category: "Dev Tools",
-    items: ["Git", "GitHub", "Azure Studio"],
+    items: ["Git", "GitHub", "Vitest"],
   },
 ];
 
