@@ -23,7 +23,7 @@ const Text = () => {
           {image && (
             <div>
               <img
-                src={"/images/Rolling_Eyes_Emoji_Icon.jpg"}
+                src={image}
                 alt={name}
                 className="w-8 h-8 rounded"
               />
