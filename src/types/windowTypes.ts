@@ -9,19 +9,7 @@ export type NavLinksTypes = {
   type: "finder" | "contact" | "resume";
 };
 
-export type DockApp =
-  | {
-      id: Exclude<(typeof dockApps)[number]["id"], "trash">;
-      name: string;
-      icon: string;
-      canOpen: true;
-    }
-  | {
-      id: "trash";
-      name: string;
-      icon: string;
-      canOpen: false;
-    };
+export type DockApp = (typeof dockApps)[number];
 
 export type WindowDataMap = {
   finder: FolderItem | null;

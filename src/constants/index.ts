@@ -55,7 +55,7 @@ const dockApps = [
     id: "photos",
     name: "Gallery",
     icon: "photos.png",
-    canOpen: false,
+    canOpen: true,
   },
   {
     id: "contact",
@@ -73,7 +73,7 @@ const dockApps = [
     id: "trash",
     name: "Archive",
     icon: "trash.png",
-    canOpen: false,
+    canOpen: true,
   },
 ] as const;
 
@@ -164,50 +164,77 @@ const socials = [
   },
 ];
 
-const photosLinks = [
+const galleryAlbums = [
+  { id: "all", title: "All Photos", icon: "/icons/gicon1.svg" },
+  { id: "efootball", title: "eFootball Explained", icon: "/images/folder.png" },
+  { id: "gridwise", title: "Gridwise", icon: "/images/folder.png" },
+  { id: "portfolio", title: "MacOS Portfolio", icon: "/images/folder.png" },
+] as const;
+
+export type GalleryAlbumId = (typeof galleryAlbums)[number]["id"];
+
+const gallery: readonly {
+  id: number;
+  album: Exclude<GalleryAlbumId, "all">;
+  name: string;
+  caption: string;
+  img: string;
+}[] = [
   {
     id: 1,
-    icon: "/icons/gicon1.svg",
-    title: "Library",
+    album: "efootball",
+    name: "efootball-home.png",
+    caption: "Home page",
+    img: "/images/project-efootball.png",
   },
   {
     id: 2,
-    icon: "/icons/gicon2.svg",
-    title: "Memories",
+    album: "efootball",
+    name: "efootball-players.jpg",
+    caption: "Every player card",
+    img: "/images/gallery/efb-players.jpg",
   },
   {
     id: 3,
-    icon: "/icons/file.svg",
-    title: "Places",
+    album: "efootball",
+    name: "efootball-finishing.jpg",
+    caption: "Stat page: Finishing",
+    img: "/images/gallery/efb-stat.jpg",
   },
   {
     id: 4,
-    icon: "/icons/gicon4.svg",
-    title: "People",
+    album: "gridwise",
+    name: "gridwise-solver.png",
+    caption: "Solver, one hint in",
+    img: "/images/project-gridwise.png",
   },
   {
     id: 5,
-    icon: "/icons/gicon5.svg",
-    title: "Favorites",
-  },
-];
-
-const gallery = [
-  {
-    id: 1,
-    img: "/images/gal1.png",
+    album: "gridwise",
+    name: "gridwise-learn.jpg",
+    caption: "Learn: 28 techniques",
+    img: "/images/gallery/grid-learn.jpg",
   },
   {
-    id: 2,
-    img: "/images/gal2.png",
+    id: 6,
+    album: "gridwise",
+    name: "gridwise-naked-pair.jpg",
+    caption: "Lesson: Naked Pair",
+    img: "/images/gallery/grid-lesson.jpg",
   },
   {
-    id: 3,
-    img: "/images/gal3.png",
+    id: 7,
+    album: "portfolio",
+    name: "portfolio-desktop.jpg",
+    caption: "Desktop and Finder",
+    img: "/images/project-portfolio.jpg",
   },
   {
-    id: 4,
-    img: "/images/gal4.png",
+    id: 8,
+    album: "portfolio",
+    name: "portfolio-windows.jpg",
+    caption: "Skills and Tools",
+    img: "/images/gallery/portfolio-windows.jpg",
   },
 ];
 
@@ -218,7 +245,7 @@ export {
   blogPosts,
   techStack,
   socials,
-  photosLinks,
+  galleryAlbums,
   gallery,
 };
 
@@ -413,30 +440,159 @@ const RESUME_LOCATION = {
   ],
 } as const;
 
+// Retired projects. Folder ids continue after the Work folders (5-7)
+// so the Finder sidebar highlight never matches two items.
 const TRASH_LOCATION = {
   id: 4,
   type: "trash",
-  name: "Trash",
+  name: "Archive",
   icon: "/icons/trash.svg",
   kind: "folder",
   children: [
     {
-      id: 1,
-      name: "trash1.png",
-      icon: "/images/image.png",
-      kind: "file",
-      fileType: "img",
-      position: "top-10 left-10",
-      imageUrl: "/images/trash-1.png",
+      id: 8,
+      name: "Fullstack templates",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 left-5",
+      children: [
+        {
+          id: 1,
+          name: "Fullstack templates.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "A matching pair of production-ready starters: a React frontend and a Node.js API built to work together.",
+            "Frontend: React 19, TanStack Router and Query, Tailwind CSS v4, Radix UI and Sonner, built with Vite and Bun.",
+            "Backend: Express 5 in strict TypeScript, Drizzle ORM on PostgreSQL, Zod validation, JWT auth with refresh tokens, Pino logging and generated OpenAPI docs.",
+            "February 2026.",
+          ],
+        },
+        {
+          id: 2,
+          name: "frontend-template.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/williamjusticedavis/frontend-template",
+          position: "top-10 right-20",
+        },
+        {
+          id: 3,
+          name: "backend-template.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/williamjusticedavis/backend-template",
+          position: "top-52 left-10",
+        },
+        {
+          id: 4,
+          name: "frontend-template.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-20",
+          imageUrl: "/images/archive/templates.jpg",
+        },
+      ],
     },
     {
-      id: 2,
-      name: "trash2.png",
-      icon: "/images/image.png",
-      kind: "file",
-      fileType: "img",
-      position: "top-40 left-80",
-      imageUrl: "/images/trash-2.png",
+      id: 9,
+      name: "AI Code Compass",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 left-72",
+      children: [
+        {
+          id: 1,
+          name: "AI Code Compass.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 right-10",
+          description: [
+            "An AI-powered onboarding tool that helps developers understand unfamiliar codebases.",
+            "Connect a GitHub repo to get AI-written architecture explanations, semantic search across the code, dependency graphs and onboarding guides.",
+            "Built with React, Express and Drizzle on PostgreSQL with pgvector, using the Claude API, Bun and Docker.",
+            "Paused partway through: authentication and project ingestion are done, the AI analysis phases are not.",
+          ],
+        },
+        {
+          id: 2,
+          name: "ai-code-compass.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/williamjusticedavis/codecompass",
+          position: "top-20 left-20",
+        },
+        {
+          id: 4,
+          name: "ai-code-compass.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 left-80",
+          imageUrl: "/images/archive/codecompass.jpg",
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: "Sudoku v1",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 left-5",
+      children: [
+        {
+          id: 1,
+          name: "Sudoku v1.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "My first take on a sudoku site, two years before Gridwise.",
+            "Daily puzzles generated on the server, with sign-up and login.",
+            "React and React Router on the frontend; Express, MongoDB (Mongoose) and JWT auth with bcrypt on the backend.",
+            "October 2024.",
+          ],
+        },
+      ],
+    },
+    {
+      id: 11,
+      name: "C++ Video Processing",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 left-72",
+      children: [
+        {
+          id: 1,
+          name: "C++ Video Processing.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "A C++ console app for editing video from the command line.",
+            "Converts between .avi, .mp4 and .mov, and can resize, trim, rotate, add text overlays and apply grayscale or blur filters.",
+            "Built with OpenCV and CMake. September 2024.",
+          ],
+        },
+        {
+          id: 2,
+          name: "cpp-video-processing.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/williamjusticedavis/CPP-video-manipulation-project",
+          position: "top-10 right-20",
+        },
+      ],
     },
   ],
 } as const;

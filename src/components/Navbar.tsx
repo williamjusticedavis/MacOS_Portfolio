@@ -1,10 +1,19 @@
 import dayjs from "dayjs";
 import { navIcons, navLinks } from "@constants";
+import { useLocationStore } from "@store/location";
 import useWindowStore from "@store/window";
 import type { NavLinksTypes } from "../types/windowTypes";
 
 const Navbar = () => {
   const { openWindow } = useWindowStore();
+  const { resetActiveLocation } = useLocationStore();
+
+  const openLink = (type: NavLinksTypes["type"]) => {
+    // "Projects" always shows the Work folder.
+    if (type === "finder") resetActiveLocation();
+    openWindow(type);
+  };
+
   return (
     <nav>
       <div>
@@ -13,7 +22,7 @@ const Navbar = () => {
 
         <ul>
           {navLinks.map(({ id, name, type }: NavLinksTypes) => (
-            <li key={id} onClick={() => openWindow(type)}>
+            <li key={id} onClick={() => openLink(type)}>
               <p>{name}</p>
             </li>
           ))}

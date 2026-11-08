@@ -1,13 +1,16 @@
-import { dockApps } from "@constants";
+import { dockApps, locations } from "@constants";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { Tooltip } from "react-tooltip";
 import gsap from "gsap";
-import useWindowStore from "@store/window";
-import type { DockApp, WindowName } from "../types/windowTypes";
+import { useLocationStore } from "@store/location";
+import useWindowStore, { type WindowKey } from "@store/window";
+import type { DockApp } from "../types/windowTypes";
 
 const Dock = () => {
   const { closeWindow, openWindow, focusWindow, windows } = useWindowStore();
+  const { activeLocation, setActiveLocation, resetActiveLocation } =
+    useLocationStore();
   const dockRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
@@ -55,24 +58,35 @@ const Dock = () => {
     };
   }, []);
 
-  const toggleApp = (app: {
-    id: WindowName & DockApp["id"];
-    canOpen: boolean;
-  }) => {
-    if (!app.canOpen) return;
-    const window = windows[app.id];
-
-    if (!window.isOpen) return openWindow(app.id);
-
-    // Open but hidden behind another window: bring it forward instead of closing it.
+  const isFrontmost = (key: WindowKey) => {
     const topZIndex = Math.max(
       ...Object.values(windows)
         .filter((w) => w.isOpen)
         .map((w) => w.zIndex),
     );
-    if (window.zIndex < topZIndex) return focusWindow(app.id);
+    return windows[key].isOpen && windows[key].zIndex === topZIndex;
+  };
 
-    closeWindow(app.id);
+  // Closed: open it. Open but buried: bring it forward. In front: close it.
+  const toggleWindow = (key: WindowKey) => {
+    if (!windows[key].isOpen) return openWindow(key);
+    if (!isFrontmost(key)) return focusWindow(key);
+    closeWindow(key);
+  };
+
+  const toggleApp = (id: DockApp["id"]) => {
+    // Archive has no window of its own: it is Finder showing the Archive folder.
+    if (id === "trash") {
+      const showingArchive = activeLocation?.type === "trash";
+      if (showingArchive && isFrontmost("finder")) return closeWindow("finder");
+      setActiveLocation(locations.trash);
+      return openWindow("finder");
+    }
+
+    // Portfolio always starts at Work, not wherever Finder was left.
+    if (id === "finder" && !windows.finder.isOpen) resetActiveLocation();
+
+    toggleWindow(id);
   };
 
   return (
@@ -88,7 +102,7 @@ const Dock = () => {
               data-tooltip-content={name}
               data-tooltip-delay-show={150}
               disabled={!canOpen}
-              onClick={() => canOpen && toggleApp({ id, canOpen })}
+              onClick={() => canOpen && toggleApp(id)}
             >
               <img
                 src={`/images/${icon}`}
