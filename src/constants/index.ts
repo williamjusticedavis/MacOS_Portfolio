@@ -168,6 +168,7 @@ const galleryAlbums = [
   { id: "all", title: "All Photos", icon: "/icons/gicon1.svg" },
   { id: "efootball", title: "eFootball Explained", icon: "/images/folder.png" },
   { id: "gridwise", title: "Gridwise", icon: "/images/folder.png" },
+  { id: "horse", title: "Horse Website", icon: "/images/folder.png" },
   { id: "portfolio", title: "MacOS Portfolio", icon: "/images/folder.png" },
 ] as const;
 
@@ -221,6 +222,27 @@ const gallery: readonly {
     name: "gridwise-naked-pair.jpg",
     caption: "Lesson: Naked Pair",
     img: "/images/gallery/grid-lesson.jpg",
+  },
+  {
+    id: 9,
+    album: "horse",
+    name: "horse-home.jpg",
+    caption: "Our horses",
+    img: "/images/project-horse.jpg",
+  },
+  {
+    id: 10,
+    album: "horse",
+    name: "horse-riding-skills.jpg",
+    caption: "Riding skills",
+    img: "/images/gallery/horse-skills.jpg",
+  },
+  {
+    id: 11,
+    album: "horse",
+    name: "horse-therapy.jpg",
+    caption: "Therapeutic riding",
+    img: "/images/gallery/horse-therapy.jpg",
   },
   {
     id: 7,
@@ -351,12 +373,63 @@ const WORK_LOCATION = {
       ],
     },
     {
+      id: 12,
+      name: "Horse Website",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 right-5",
+      windowPosition: "top-[33vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "Horse Website.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "A Hebrew, right-to-left website for horse enthusiasts and riding instructors.",
+            "Three sections: profiles of the horses with photos and tags, an overview of therapeutic riding with cards matched to each child's needs, and a riding-skills reference that instructors can browse by category, difficulty and prerequisite chain.",
+            "Accounts and an admin panel for managing users and content, with photo uploads.",
+            "Built on my fullstack templates: React 19 with TanStack Router and Query and Tailwind CSS v4, plus an Express 5 API with Drizzle on PostgreSQL, JWT auth and OpenAPI docs. Deployed on Render.",
+          ],
+        },
+        {
+          id: 2,
+          name: "horse-website.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://horse-3llf.onrender.com",
+          position: "top-10 right-20",
+        },
+        {
+          id: 3,
+          name: "horse-github.com",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/williamjusticedavis/horse-frontend",
+          position: "top-52 left-10",
+        },
+        {
+          id: 4,
+          name: "horse-website.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-20",
+          imageUrl: "/images/project-horse.jpg",
+        },
+      ],
+    },
+    {
       id: 7,
       name: "MacOS Portfolio",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
-      windowPosition: "top-[33vh] left-7",
+      windowPosition: "top-[46vh] left-7",
       children: [
         {
           id: 1,
@@ -442,7 +515,7 @@ const RESUME_LOCATION = {
   ],
 } as const;
 
-// Retired projects. Folder ids continue after the Work folders (5-7)
+// Retired projects. Folder ids 8-11 avoid the Work folders (5-7, 12)
 // so the Finder sidebar highlight never matches two items.
 const TRASH_LOCATION = {
   id: 4,
