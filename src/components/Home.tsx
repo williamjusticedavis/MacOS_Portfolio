@@ -5,11 +5,13 @@ import useWindowStore from "@store/window";
 import type { FolderItem, LocationFolder } from "../types/finderTypes";
 import clsx from "clsx";
 import { Draggable } from "gsap/Draggable";
+import { useRef } from "react";
 
 const projects = locations.work.children ?? [];
 const Home = () => {
   const { setActiveLocation } = useLocationStore();
   const { openWindow } = useWindowStore();
+  const homeRef = useRef<HTMLElement | null>(null);
 
   const handleOpenProjectFinder = (project: FolderItem) => {
     if (project.kind !== "folder") return;
@@ -17,12 +19,17 @@ const Home = () => {
     openWindow("finder", project);
   };
 
-  useGSAP(() => {
-    Draggable.create(".folder");
-  }, []);
+  // Re-created whenever the folder list changes, so every folder can be dragged.
+  useGSAP(
+    () => {
+      const draggables = Draggable.create(".folder");
+      return () => draggables.forEach((d) => d.kill());
+    },
+    { scope: homeRef, dependencies: [projects.length] },
+  );
 
   return (
-    <section id="home">
+    <section id="home" ref={homeRef}>
       <ul>
         {projects.map((project) => (
           <li
