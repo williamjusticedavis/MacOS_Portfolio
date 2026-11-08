@@ -1,5 +1,6 @@
 import { INITIAL_Z_INDEX, WINDOW_CONFIG } from "@constants";
 import type { WindowDataMap } from "../types/windowTypes";
+import { castDraft } from "immer";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -31,19 +32,14 @@ const useWindowStore = create<WindowStore>()(
     windows: WINDOW_CONFIG,
     nextZIndex: INITIAL_Z_INDEX + 1,
 
+    // Opening always brings the window to the front, even if it was already open.
     openWindow: (windowKey, data) =>
-      set((state) => ({
-        windows: {
-          ...state.windows,
-          [windowKey]: {
-            ...state.windows[windowKey],
-            isOpen: true,
-            zIndex: state.nextZIndex + 1,
-            data: data ?? state.windows[windowKey].data,
-          },
-          nextZIndex: state.nextZIndex + 1,
-        },
-      })),
+      set((state) => {
+        const win = state.windows[windowKey];
+        win.isOpen = true;
+        win.zIndex = state.nextZIndex++;
+        if (data !== undefined) win.data = castDraft(data);
+      }),
 
     closeWindow: (windowKey) =>
       set((state) => {

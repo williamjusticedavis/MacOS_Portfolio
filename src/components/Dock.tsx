@@ -7,7 +7,7 @@ import useWindowStore from "@store/window";
 import type { DockApp, WindowName } from "../types/windowTypes";
 
 const Dock = () => {
-  const { closeWindow, openWindow, windows } = useWindowStore();
+  const { closeWindow, openWindow, focusWindow, windows } = useWindowStore();
   const dockRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
@@ -62,11 +62,17 @@ const Dock = () => {
     if (!app.canOpen) return;
     const window = windows[app.id];
 
-    if (window.isOpen) {
-      closeWindow(app.id);
-    } else {
-      openWindow(app.id);
-    }
+    if (!window.isOpen) return openWindow(app.id);
+
+    // Open but hidden behind another window: bring it forward instead of closing it.
+    const topZIndex = Math.max(
+      ...Object.values(windows)
+        .filter((w) => w.isOpen)
+        .map((w) => w.zIndex),
+    );
+    if (window.zIndex < topZIndex) return focusWindow(app.id);
+
+    closeWindow(app.id);
   };
 
   return (
